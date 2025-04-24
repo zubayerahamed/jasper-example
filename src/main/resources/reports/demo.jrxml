@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 5.1.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="demo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9ee2dba-afb4-4c53-99af-a98c96ad0195">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZGJvLnpidXNpbmVzcyBBUyAsNTgsMTMsMzI2MGYzMDUtYjE2MS00ZDVjLWIyM2EtZDAwMDRhYTdj&#xA;NGY0Ow=="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DEMO"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT zid,
+	xlogo,
+	zorg,
+	zactive,
+	xrptpath,
+	xfilesize,
+	xmadd
+FROM dbo.zbusiness]]>
+	</queryString>
+	<field name="zid" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="zid"/>
+		<property name="com.jaspersoft.studio.field.label" value="zid"/>
+	</field>
+	<field name="xlogo" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="xlogo"/>
+		<property name="com.jaspersoft.studio.field.label" value="xlogo"/>
+	</field>
+	<field name="zorg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="zorg"/>
+		<property name="com.jaspersoft.studio.field.label" value="zorg"/>
+	</field>
+	<field name="zactive" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="zactive"/>
+		<property name="com.jaspersoft.studio.field.label" value="zactive"/>
+	</field>
+	<field name="xrptpath" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="xrptpath"/>
+		<property name="com.jaspersoft.studio.field.label" value="xrptpath"/>
+	</field>
+	<field name="xfilesize" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="xfilesize"/>
+		<property name="com.jaspersoft.studio.field.label" value="xfilesize"/>
+	</field>
+	<field name="xmadd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="xmadd"/>
+		<property name="com.jaspersoft.studio.field.label" value="xmadd"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="-3" y="0" width="560" height="30" uuid="4768f5cc-562b-49e8-b29d-6badba27cae6"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Demo of Jasper Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="227" y="30" width="100" height="30" uuid="d698c1f9-5015-4358-bb3d-333f7301bba0"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zorg}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="50" height="50" uuid="392c22b3-921e-4666-9716-f7b253f179d3"/>
+				<imageExpression><![CDATA[$F{xlogo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="78" y="11" width="402" height="30" uuid="2bb7b538-3bda-4e4c-8d96-83fac589878f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Siyam Rupali" size="12" isBold="false" pdfFontName="fonts/Siyamrupali_1_01.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[আমার সোনার বাংলা, আমি তোমায় ভালোবাসি]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

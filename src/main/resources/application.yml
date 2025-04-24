@@ -1,0 +1,54 @@
+# application.yml
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=demo;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: zubayer@123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 10
+      idle-timeout: 300000
+      max-lifetime: 1800000
+
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
+
+server:
+  port: 8080
+  servlet:
+    context-path: /report-api
+  tomcat:
+    max-swallow-size: 2GB
+    max-http-form-post-size: 2GB
+
+jasper:
+  temp-dir: ${java.io.tmpdir}/jasper_reports
+  virtualizer:
+    max-size: 200
+    activated: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    net.sf.jasperreports: WARN
+  file:
+    name: logs/application.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Optional JPA/Hibernate properties
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
