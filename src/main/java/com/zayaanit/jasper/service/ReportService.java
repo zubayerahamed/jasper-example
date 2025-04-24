@@ -1,47 +1,47 @@
 package com.zayaanit.jasper.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 
 @Service
 public class ReportService {
 
-	@Autowired private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
+	@Autowired
+	private ResourceLoader resourceLoader;
 
-	public byte[] generateReport(String reportName, Map<String, Object> parameters) throws JRException, SQLException, IOException {
+	public byte[] generateReportExample1(String reportName, Map<String, Object> parameters)
+			throws JRException, SQLException, IOException {
+		Resource resource = resourceLoader.getResource("classpath:reports/demo.jrxml");
+		if (!resource.exists()) {
+			throw new FileNotFoundException("Report file not found: " + reportName);
+		}
 
-		File f = new File("C:\\Users\\METATUDE-07\\JaspersoftWorkspace\\MyReports\\demo.jasper");
-		// Load compiled report
-		InputStream reportStream = new FileInputStream(f);
-		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportStream);
-//		InputStream reportStream = resourceLoader.getResource("classpath:reports/" + reportName + ".jasper").getInputStream();
+		try (InputStream inputStream = resource.getInputStream();
+				Connection connection = DataSourceUtils.getConnection(dataSource);) {
 
-		try (Connection connection = DataSourceUtils.getConnection(dataSource);) {
-			// Fill report with virtualization
+			JasperReport jasperReport = JasperCompileManager.compileReport(resource.getInputStream());
+
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
 
 			// Export to PDF

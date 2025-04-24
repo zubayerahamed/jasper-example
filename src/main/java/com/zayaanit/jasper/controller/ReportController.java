@@ -20,18 +20,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 
 @RestController
-@RequestMapping("/api/reports")
+@RequestMapping("/example")
 public class ReportController {
 
 	@Autowired private ReportService reportService;
 
-	@GetMapping(value = "/large", produces = MediaType.APPLICATION_PDF_VALUE)
+	@GetMapping(value = "/1", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<byte[]> generateLargeReport(HttpServletResponse response,
 			@RequestParam(required = false, defaultValue = "demo") String reportName) throws IOException, JRException, SQLException {
 
 		Map<String, Object> parameters = new HashMap<>();
 
-		byte[] reportBytes = reportService.generateReport(reportName, parameters);
+		byte[] reportBytes = reportService.generateReportExample1(reportName, parameters);
 
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + reportName + ".pdf\"")
