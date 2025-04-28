@@ -37,8 +37,10 @@ public class ReportService {
 			throw new FileNotFoundException("Report file not found: " + reportName);
 		}
 
-		try (InputStream inputStream = resource.getInputStream();
-				Connection connection = DataSourceUtils.getConnection(dataSource);) {
+		try (
+			InputStream inputStream = resource.getInputStream();
+			Connection connection = DataSourceUtils.getConnection(dataSource);
+		) {
 
 			JasperReport jasperReport = JasperCompileManager.compileReport(resource.getInputStream());
 
